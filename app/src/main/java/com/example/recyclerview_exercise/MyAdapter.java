@@ -20,9 +20,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     ArrayList<Integer> numbArray;
     Context context;
 
-    //Added because of constant final suggestion...
-    private int pos;
-
     public MyAdapter(Context ct, ArrayList<Integer> numbers) {
         context = ct;
         numbArray = numbers;
@@ -39,8 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
-        pos = position;
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         Log.d("aei", "onBindViewHolder: position = " + position);
         Log.d("MyArray", "onBindViewHolder: postioncheck= " + numbArray.get(5));
         holder.myText1.setText(numbArray.get(position) + "");
