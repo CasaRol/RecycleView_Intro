@@ -8,11 +8,12 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    int[] numbers = new int[1000];;
+    ArrayList<Integer> numbers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +21,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         for(int i = 0; i<1000; i++) {
-            numbers[i] = i+1;
+            numbers.add(i+1);
         }
+        Log.d("WHAT", "onCreate: index value = " + numbers.get(5));
 
         recyclerView = findViewById(R.id.recyclerview);
 

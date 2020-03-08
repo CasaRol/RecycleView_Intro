@@ -8,16 +8,26 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-    int[] numbArray;
+    ArrayList<Integer> numbArray;
     Context context;
 
-    public MyAdapter(Context ct, int[] numbers) {
+    //Added because of constant final suggestion...
+    private int pos;
+
+    public MyAdapter(Context ct, ArrayList<Integer> numbers) {
         context = ct;
         numbArray = numbers;
+        Log.d("MyArray", "MyAdapter: numbers= " + numbers.get(5));
+        Log.d("MyArray", "MyAdapter: numbArray= " + numbArray.get(5));
     }
 
     @NonNull
@@ -29,23 +39,38 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.myText1.setText(numbArray[position] + "");
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
+        pos = position;
+        Log.d("aei", "onBindViewHolder: position = " + position);
+        Log.d("MyArray", "onBindViewHolder: postioncheck= " + numbArray.get(5));
+        holder.myText1.setText(numbArray.get(position) + "");
+
+        holder.conLayout.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //numbArray.remove(pos);
+                Snackbar snackbar = Snackbar.make(holder.conLayout, "This is a sncakbar", Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 1000;
+        return numbArray.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView myText1;
+        ConstraintLayout conLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             myText1 = itemView.findViewById(R.id.numberInList);
+            conLayout = itemView.findViewById(R.id.recyclerview);
         }
     }
 }
