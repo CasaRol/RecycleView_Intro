@@ -1,11 +1,10 @@
 package com.example.recyclerview_exercise;
 
 import android.content.Context;
-import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,15 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-    String data1[], data2[];
-    int images[];
+    int[] numbArray;
     Context context;
 
-    public MyAdapter(Context ct, String s1[], String s2[], int img[]) {
+    public MyAdapter(Context ct, int[] numbers) {
         context = ct;
-        data1 = s1;
-        data2 = s2;
-        images = img;
+        numbArray = numbers;
     }
 
     @NonNull
@@ -34,27 +30,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.myText1.setText(data1[position]);
-        holder.myText2.setText(data2[position]);
-        holder.myImage.setImageResource(images[position]);
+        holder.myText1.setText(numbArray[position] + "");
     }
 
     @Override
     public int getItemCount() {
-        return data1.length;
+        return 1000;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView myText1, myText2;
-        ImageView myImage;
+        TextView myText1;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            myText1 = itemView.findViewById(R.id.programmingLanguage);
-            myText2 = itemView.findViewById(R.id.description);
-            myImage = itemView.findViewById(R.id.myImageView);
+            myText1 = itemView.findViewById(R.id.numberInList);
         }
     }
 }
