@@ -66,7 +66,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             super(itemView);
 
             myText1 = itemView.findViewById(R.id.numberInList);
-            conLayout = itemView.findViewById(R.id.recyclerview);
+            conLayout = (ConstraintLayout) itemView;
         }
     }
 }
